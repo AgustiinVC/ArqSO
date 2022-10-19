@@ -1,0 +1,136 @@
+Desmontar una particion:
+sudo udisksctl unmount -b /dev/sd(particion)
+
+Listar los directorios:
+ls -l
+
+Administrar la particion del disco:
+sudo fdisk /dev/sd(x)(numero de particion)
+-n Crear particion
+-w Guardar los datos y salir
+-d Borrar una particion
+
+Chequear los discos (muestra particiones y donde está montado):
+lsblk
+
+Dar formato a un disco:
+sudo mkfs.ext4 /dev/sd(x)(numero de particion)
+
+Montar una particion en un directorio específico:
+sudo mount /dev/sd(x)(numero de particion) nombreDelDirectorio/destino
+
+Crear un directorio con un subdirectorio:
+mkdir -p nombreDelDirectorio/{nombreSubDirectorioUno/archivoDentroDeSubDirectorioUno,nombreSubDirectorioDos/archivoDentroDeSubDirectorioDos}
+
+Crear un directorio con multiples subdirectorios:
+mkdir -p nombreDirectorio/{nombreSubDirecUno/EjemploUno,nombreSubDirectUno/EjemploDos,nombreSubDirecDos/EjemploUno,nombreSubDirecDos/EjemploDos}
+
+Copiar un archivo de información en un .txt:
+cat /proc/cpuinfo > nombreDirectorio/nombreSubDirectorio/nombreArchivo.txt
+
+Copiar una información de sistema directo en un .txt
+ifconfig > nombreDirectorio/nombreSubDirectorio/nombreArchivo.txt
+
+echo -n "" > archivo.txt && cat /proc/cpuinfo | grep vendor | uniq | cut -d ":" -f2 >> archivo.txt
+
+--------------------------------------------------------------------------------------
+
+Para info de sistema:
+
+● arch: mostrará la arquitectura de tu ordenador.
+● uname -r: mostrará la versión del kernel que está usado.
+● dmidecode -q: mostrará los componentes de hardware presentes en el sistema.
+● hdparm -i /dev/hda: mostrará las características del disco duro que le indiques.
+● cat /proc/cpuinfo: mostrará la información sobre la CPU.
+● cat /proc/meminfo: verificará el uso de memoria RAM.
+● free -m: muestra el estado y uso de la memoria RAM.
+● cat /proc/net/dev: mostrará los adaptadores de red y sus estadísticas.
+● cat /proc/mounts: mostrará el sistema de archivos montado.
+● lspci -tv: mostrará los dispositivos PCI presentes.
+● lsusb -tv: mostrará los dispositivos USB conectados.
+● top: mostrará las tareas de Linux usando la mayoría de CPU.
+● date: mostrará la fecha actual del sistema.
+● cal 2018: mostrará el calendario completo del año indicado. En este caso 2018.
+● cal 05 2018: similar a la anterior, pero solo mostrará el mes del año indicado. En este
+caso, mayo de 2018.
+● man ping: muestra las páginas del manual de ayuda para el comando indicado, en este
+caso el comando ping.
+● sudo de -sh /nombreDirectorio: veo el peso del directorio
+● lsb_release: info distribucion
+● cat /etc/issue: nombre distribucion
+● cat /proc/interrupts => mostrar interrupciones
+● cat /proc/swaps =>mostrar ficheros swap
+● cat /proc/version => mostrar version de kernel
+● cat /proc/net/dev=> mostrar adaptadores de red y estadísticas
+● cat /proc/mounts => sistema de ficheros montado
+● lscpu => mostrar info sobre microprocesador
+
+Para mover de directorio
+● cd /home/usuario: Te llevará directamente hasta la ruta que indiques, en este caso
+hasta el directorio “usuario”.
+● cd ..: retrocederás un nivel en la jerarquía de directorios.
+● cd ../..: retrocederás 2 niveles en la jerarquía de directorios.
+● cd: te llevará al directorio raíz de esa unidad.
+● cd ~usuario: irás al directorio principal del usuario que indiques.
+● cd –: regresarás al directorio anterior.
+● pwd: mostrará la ruta del directorio donde te encuentras actualmente.
+● ls: mostrará los archivos y carpetas del directorio donde te encuentras.
+● ls -l: mostrará los detalles de archivos y carpetas del directorio actual.
+● ls -a: mostrará los archivos ocultos del directorio actual
+
+Gestión de archivos y directorios
+
+● mkdir Directorio: creará una nueva carpeta o directorio con nombre que le indiques.
+En este caso, “Directorio”.
+● mkdir Directorio1 Directorio 2: creará dos carpetas simultáneamente.
+● rmdir Directorio: borrará la carpeta llamada “Directorio”.
+● rm -rf Directorio: eliminará una carpeta llamada “Directorio” y todo su contenido.
+● mv Viejodirectorio Nuevodirectorio: renombrará o moverá un archivo o carpeta.
+● cp Archivo: copiará un archivo.
+● cp Archivo1 Archivo2: copiará dos archivos simultáneamente.
+● cp -a Directorio: copiará una carpeta completa, en este caso “Directorio”.
+● cp -a Directorio1 Directorio2: copiará dos directorios simultáneamente.
+● ln -s Archivo Enlacearchivo: creará un enlace simbólico con un determinado nombre, al
+archivo o directorio indicado.
+● ln Archivo Enlacearchivo: creará un enlace físico con el nombre indicado al archivo o
+directorio indicado
+● find / -name Archivo: buscará ese archivo o directorio comenzado por la raíz del
+sistema.
+
+Para gestión de usuarios
+● ls -lh: Mostrará los permisos de un archivo.
+● chown Usuario1 Archivo1: cambiará el propietario de un determinado archivo.
+● chown -R Usuario1 directory1: cambiará el propietario de un determinado directorio y de
+todos los archivos y subdirectorios contenidos dentro.
+● chattr +i Archivo1: convierte el archivo en invariable, por lo que no puede ser eliminado,
+alterado, renombrado, ni enlazado.
+● chattr +s Archivo1: permite que un archivo sea borrado de forma segura.
+● lsattr: mostrará los atributos especiales.
+● whoami: quién eres tú
+● cat /etc/passwd: mostrará los usuarios presentes en el equipo.
+● cat /etc/group: mostrará los grupos presentes en el equipo
+● groupadd nombre_del_grupo: crear un nuevo grupo en el sistema.
+● groupdel nombre_del_grupo: borrará un grupo ya existente en el sistema.
+● groupmod -n nuevo_grupo viejo_grupo: renombrará un grupo ya existente.
+● useradd -c “Nombre usuario” -g admin -d /home/nuevousuario -s
+/bin/bashnuevousuario: Creará un nuevo usuario perteneciente al grupo “admin”.
+● useradd Usuario1: creará un nuevo usuario.
+● userdel -r Usuario1: borrará un usuario y su directorio Home.
+● passwd: cambiará tu contraseña de usuario.
+● passwd Usuario1: cambiará la contraseña del usuario indicado (solo permitido para el
+usuario root).
+
+Para gestión de paquetes
+
+● dpkg -i paquete.deb: instalará o actualizará un paquete deb.
+● dpkg -r paquete: eliminará un determinado paquete deb del sistema.
+● dpkg -l: mostrará todos los paquetes deb instalados en el sistema.
+● dpkg -s paquete: mostrará información del paquete indicado instalado en el sistema.
+Gestor de paquetes APT
+● apt-get install paquete: instalará o actualizará un determinado paquete deb.
+● apt-cdrom install paquete: instalará o actualizará un paquete deb desde un cdrom.
+● apt-get update: actualizará la lista de paquetes instalados.
+● apt-get upgrade: actualizará todos los paquetes instalados.
+● apt-get remove paquete: eliminará el paquete deb indicado del sistema.
+● apt-get check: verificará la correcta resolución de las dependencias.
+● apt-get clean: limpiará la cache desde los paquetes descargados.
